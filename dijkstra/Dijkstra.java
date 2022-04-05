@@ -6,19 +6,41 @@ import java.lang.Thread;
 public class Dijkstra {
 
     private static GridFrame gridFrame;
-    //private static GridFrame.DrawCanvas canvas;
     private static GridStruct gridStruct;
-    private static Point[][] grid;
+    private static Node[][] grid;
 
-    private Comparator<Point> pointComp = new Comparator<Point>() {
-        public int compare(Point p1, Point p2) {
-            if (p1.getDist() < p2.getDist()) return -1;
-            if (p1.getDist() == p2.getDist()) return 0;
+
+
+    private static Comparator<Node> nodeComp = new Comparator<Node>() {
+        public int compare(Node n1, Node n2) {
+            if (n1.getDist() < n2.getDist()) return -1;
+            if (n1.getDist() == n2.getDist()) return 0;
             else return 1;
         };
     };
-    private PriorityQueue<Point> PQ;
-    private LinkedList<Point> shortestPath;
+    private static PriorityQueue<Node> PQ;
+    private static LinkedList<Node> shortestPath;
+
+    // The core Dijkstra's algorithm
+    public static void algorithm(){
+        PQ = new PriorityQueue<Node>(nodeComp);
+        //TODO here
+        reverseWalk();
+    }
+
+    private static void reverseWalk(){
+        shortestPath = new LinkedList<Node>();
+        //TODO here
+    }
+
+    // AUX func
+    public static void run(){
+        algorithm();
+        gridFrame.drawShortestPath(shortestPath);
+    }
+
+
+
 
     //private static void printErr(){ System.out.println("Passare gli argomenti: righe (int) colonne (int) walls_file (path, optional)"); }
 
@@ -28,51 +50,31 @@ public class Dijkstra {
             @Override
             public void run(){
                 gridFrame = new GridFrame();
-                //canvas = gridFrame.getCanvas();
-
                 gridStruct = gridFrame.getGridStruct();
                 grid = gridStruct.getGrid();
             }
         });
 
         try {
-            Thread.sleep(4000);
-            Point p = grid[10][10];
-            p.setValue(Point.Value.START);
-            gridFrame.updatePointValue(p);
+            Thread.sleep(2000);
+            Node n1 = grid[10][10];
+            Node n2 = grid[40][40];
+            gridStruct.setStart(10,10);
+            gridFrame.updateNodeValue(n1);
+            gridStruct.setFinish(40,40);
+            gridFrame.updateNodeValue(n2);
+
+            Thread.sleep(2000);
+            Node prev_start = gridStruct.resetStart();
+            Node prev_finish = gridStruct.resetFinish();
+            gridFrame.updateNodeValue(prev_start);
+            gridFrame.updateNodeValue(prev_finish);
         } catch(InterruptedException e){
             e.printStackTrace();
             return;
         }
 
     }
-
-    /*    if (args.length < 2){
-            printErr();
-            return;
-        }
-
-        int rows, cols;
-        //File wallsPath;
-
-        try{
-            rows = Integer.parseInt(args[0]);
-            cols = Integer.parseInt(args[1]);
-        } catch (NumberFormatException e){
-            e.printStackTrace();
-            return;
-        }
-
-        if (args.length > 2){
-            System.out.println("Gestione del percorso del file contenente i muri (generatore random?)");
-        }
-
-        Grid gridObj = new Grid(rows,cols);
-        gridObj.draw();
-        return;
-
-    }
-    */
 
 }
 
