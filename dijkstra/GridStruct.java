@@ -65,6 +65,10 @@ public class GridStruct {
 
     public int getCols(){ return this.cols; }
 
+    public Node getStart(){ return this.currentStart; }
+
+    public Node getFinish(){ return this.currentFinish; }
+
     public void setStart(int x, int y){
         Node n = grid[x][y];
         n.setStart();
@@ -80,7 +84,8 @@ public class GridStruct {
     public void setWall(int x, int y){
         Node n = grid[x][y];
         n.setWall();
-        currentWalls.add(n);
+        if (! currentWalls.contains(n))
+            currentWalls.add(n);
     }
 
 

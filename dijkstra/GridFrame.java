@@ -263,5 +263,10 @@ public class GridFrame {
         this.showingPath = true;
 
     }
+
+    // Non esiste un percorso tra START e FINISH
+    public void pathNotFound(){
+        //TODO here
+    }
     
 }
