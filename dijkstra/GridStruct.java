@@ -1,3 +1,5 @@
+package dijkstra;
+
 import java.util.*;
 
 public class GridStruct {
@@ -117,12 +119,15 @@ public class GridStruct {
         return ret;
     }
 
-    public void resetAllDist(){
+    public void resetAll(){
         for (int r=0; r<this.rows; ++r){
             for (int c=0; c<this.cols; ++c){
                 Node n = this.grid[r][c];
-                if (n.getValue() != Node.Value.START) n.setDist(Integer.MAX_VALUE);
-                else n.setDist(0);
+                n.setState(Node.State.UNEXPLORED);
+                if (n.getValue() != Node.Value.START)
+                    n.setDist(Integer.MAX_VALUE);
+                else
+                    n.setDist(0);
             }
         }
     }

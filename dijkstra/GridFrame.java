@@ -1,3 +1,5 @@
+package dijkstra;
+
 import java.awt.*;
 import java.awt.event.*; // Mouse event handling
 import javax.swing.*;
@@ -14,6 +16,7 @@ public class GridFrame {
     private static final Color WALL_COLOR = Color.WHITE;
     private static final Color PATH_COLOR = Color.GREEN;
     private static final Color EXPLORE_COLOR = Color.BLUE;
+    private static final Color ERR_COLOR = Color.RED;
 
     private JFrame frame;
     private JPanel panel;
@@ -94,7 +97,7 @@ public class GridFrame {
             int k = e.getKeyCode();
             // ENTER
             if (k == 10){
-                gridStruct.resetAllDist();
+                gridStruct.resetAll();
                 Dijkstra.run();
                 return;
             }
@@ -238,6 +241,24 @@ public class GridFrame {
         int cols = gridStruct.getCols();
         Graphics g = this.panel.getGraphics();
 
+        boolean found = true;
+        // Non esiste un percorso tra START e FINISH
+        if (path.size() == 0){
+            found = false;
+            for (int x=0; x<rows; ++x){
+                for (int y=0; y<cols; ++y){
+                    Node n = grid[x][y];
+                    int canvasX = x*10;
+                    int canvasY = y*10;
+                    if (n.getValue() == Node.Value.NORMAL){
+                        g.setColor(ERR_COLOR);
+                        g.fillRect(canvasX, canvasY, 10, 10);
+                    }
+                }
+            }
+            Dijkstra.sleep(1000L);
+        }
+
         // Resetto i valori dei punti che non sono START, FINISH o WALL
         for (int x=0; x<rows; ++x){
             for (int y=0; y<cols; ++y){
@@ -253,20 +274,20 @@ public class GridFrame {
             }
         }
 
+        //! ROADBLOCK
+        if (!found) return;
+
         // Disegno il percorso migliore tra START e FINISH
         g.setColor(PATH_COLOR);
         for (Node n : path){
             int canvasX = n.getX()*10;
             int canvasY = n.getY()*10;
             g.fillRect(canvasX, canvasY, 10, 10);
+            //? DELAY
+            if (Dijkstra.DELAY_MS > 0) Dijkstra.sleep(Dijkstra.DELAY_MS);
         }
         this.showingPath = true;
 
-    }
-
-    // Non esiste un percorso tra START e FINISH
-    public void pathNotFound(){
-        //TODO here
     }
     
 }

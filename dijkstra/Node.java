@@ -1,6 +1,9 @@
-import java.util.*;
+package dijkstra;
 
-public class Node {
+import java.util.*;
+import java.lang.Comparable;
+
+public class Node implements Comparable<Node> {
 
     public enum State {
         UNEXPLORED,
@@ -87,6 +90,12 @@ public class Node {
             if (! n.getAdj().contains(this))
                 n.addAdj(this);
         }
+    }
+
+    public int compareTo(Node n2){
+        if (this.dist < n2.dist) return -1;
+        if (this.dist > n2.dist) return 1;
+        else return 0;
     }
 
 }
