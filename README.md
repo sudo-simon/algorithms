@@ -20,4 +20,5 @@ The programming language used may vary according to what I feel like working on 
     java <packagename>.<Classname> <args>
     ```
     where packagename is the folder name and Classname is the same as the folder name but capitalized.
-    Every program has a "--help" argument that can be passed, if passed alone, that explains how it works.
+
+Every program has a "--help" argument that can be passed, if passed alone, that explains how it works.
