@@ -14,7 +14,7 @@ The programming language used may vary according to what I feel like working on 
 
 ## How to use
 
-- Java programs
+- **Java programs**
     must be executed from this main folder with 
     ```sh
     java <packagename>.<Classname> <args>
