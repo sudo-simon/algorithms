@@ -121,10 +121,11 @@ public class Dijkstra {
             "\n"+
             "Parameters:\n"+
             "   -fs (--fullscreen): to set the window to fullscreen\n"+
+            "   -s (--size) <INT>: to set the size of the single grid squares to <INT> (default is 10)\n"+
+            "       (smaller square sizes will result in more total squares to travel, and vice versa)\n"+
             "   -d (--delay) <INT>: to have a <INT> milliseconds delay between operations for a clearer visualization\n"+
-            "       NOTE: YET TO BE OPTIMIZED! Few milliseconds will result in big delays so use very small numbers (1~5)\n"+
-            "   -s (--size) <INT>: to set the size of the single grid squares to <INT>\n"+
-            "       (smaller square sizes will result in more total squares to travel, and vice versa)\n"
+            "       NOTE: DEPRECATED AND YET TO BE OPTIMIZED! Few milliseconds will result in big delays so use very small numbers (1~5)\n"
+            
         );
     }
 
