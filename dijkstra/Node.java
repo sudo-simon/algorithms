@@ -5,6 +5,9 @@ import java.lang.Comparable;
 
 public class Node implements Comparable<Node> {
 
+    //? Valore massimo delle distanze (Integer.MAX_VALUE da problemi di overflow)
+    public static final int MAX_DIST = 9999999;
+
     public enum State {
         UNEXPLORED,
         EXPLORING,
@@ -30,7 +33,7 @@ public class Node implements Comparable<Node> {
         this.value = val;
         this.state = State.UNEXPLORED;
         if (val == Value.START) this.dist = 0;
-        else this.dist = Integer.MAX_VALUE;
+        else this.dist = MAX_DIST;
         this.adjacent = new ArrayList<Node>();
     }
 
@@ -47,8 +50,8 @@ public class Node implements Comparable<Node> {
     public ArrayList<Node> getAdj(){ return this.adjacent; }
 
 
-
-    //public void setValue(Value new_val){ this.value = new_val; }  //! DEPRECATED
+    @Deprecated
+    public void setValue(Value new_val){ this.value = new_val; }
 
     public void setState(State new_state){ this.state = new_state; }
 

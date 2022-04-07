@@ -24,35 +24,35 @@ public class GridStruct {
             for (int c=0; c<cols; ++c){
 
                 Node n = this.grid[r][c];
-                ArrayList<Node> adj = new ArrayList<Node>();
 
                 // Nodo sopra
                 if (r!=0)
-                    adj.add(this.grid[r-1][c]);
+                    n.addAdj(this.grid[r-1][c]);
                 // Nodo sotto
                 if (r!=rows-1)
-                    adj.add(this.grid[r+1][c]);
+                    n.addAdj(this.grid[r+1][c]);
                 // Nodo a sinistra
                 if (c!=0)
-                    adj.add(this.grid[r][c-1]);
+                    n.addAdj(this.grid[r][c-1]);
                 // Nodo a destra
                 if (c!=cols-1)
-                    adj.add(this.grid[r][c+1]);
+                    n.addAdj(this.grid[r][c+1]);
+                
+                // Decomment to allow diagonal traveling
+                /*
                 // Nodo in alto a sinistra
                 if (r!=0 && c!=0)
-                    adj.add(this.grid[r-1][c-1]);
+                    n.addAdj(this.grid[r-1][c-1]);
                 // Nodo in alto a destra
                 if (r!=0 && c!=cols-1)
-                    adj.add(this.grid[r-1][c+1]);
+                    n.addAdj(this.grid[r-1][c+1]);
                 // Nodo in basso a sinistra
                 if (r!=rows-1 && c!=0)
-                    adj.add(this.grid[r+1][c-1]);
+                    n.addAdj(this.grid[r+1][c-1]);
                 // Nodo in basso a destra
                 if (r!=rows-1 && c!=cols-1)
-                    adj.add(this.grid[r+1][c+1]);
-
-                for (Node a : adj)
-                    n.addAdj(a);
+                    n.addAdj(this.grid[r+1][c+1]);
+                */
                 
             }
         }
@@ -125,7 +125,7 @@ public class GridStruct {
                 Node n = this.grid[r][c];
                 n.setState(Node.State.UNEXPLORED);
                 if (n.getValue() != Node.Value.START)
-                    n.setDist(Integer.MAX_VALUE);
+                    n.setDist(Node.MAX_DIST);
                 else
                     n.setDist(0);
             }
